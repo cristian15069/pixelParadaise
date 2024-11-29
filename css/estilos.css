@@ -1,0 +1,566 @@
+/* Temas de Material Design 3  */
+@import url(./tokens.css);
+@import url(../lib/css/shape.css);
+@import url(../lib/css/motion.css);
+@import url(../lib/css/state.css);
+@import url(../lib/css/elevation.css);
+@import url(../lib/css/colors.module.css);
+@import url(../lib/css/typography.css);
+@import url(../lib/css/theme.light.css) (prefers-color-scheme: light);
+@import url(../lib/css/theme.dark.css) (prefers-color-scheme: dark);
+/* Fonts utilizados */
+@import url(../lib/css/roboto.css);
+@import url(../lib/css/material-symbols-outlined.css);
+/* CSS de elementos utilizados */
+@import url(../lib/css/md-ripple.css);
+@import url(../lib/css/md-top-app-bar.css);
+@import url(../lib/css/md-menu.css);
+@import url(../lib/css/md-standard-icon-button.css);
+@import url(../lib/css/md-filled-button.css);
+@import url(../lib/css/md-outline-button.css);
+@import url(../lib/css/md-switch.css);
+@import url(../lib/css/md-slider-field.css);
+@import url(../lib/css/md-segmented-button.css);
+@import url(../lib/css/md-list.css);
+@import url(../lib/css/md-cards.css);
+@import url(../lib/css/md-tab.css);
+@import url(../lib/css/md-navigation-bar.css);
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap');
+html {
+  --tabWidth: 60px;
+  --anchoNav: 360px;
+}
+
+main {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Quita un borde rojo que coloca Firefox. */
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+body {
+  margin: 0;
+  display: none;
+  font-family: var(--md-sys-typescale-body-large-font);
+  font-weight: var(--md-sys-typescale-body-large-weight);
+  font-size: var(--md-sys-typescale-body-large-size);
+  font-style: var(--md-sys-typescale-body-large-font-style);
+  letter-spacing: var(--md-sys-typescale-body-large-tracking);
+  line-height: var(--md-sys-typescale-body-large-line-height);
+  text-transform: var(--md-sys-typescale-body-large-text-transform);
+  text-decoration: var(--md-sys-typescale-body-large-text-decoration);
+  color: var(--md-sys-color-on-background);
+  background-color: var(--md-sys-color-background);
+}
+
+body.fouc {
+  display: block;
+  opacity: 0;
+  animation-name: fouc;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+html {
+  --Font: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  font-size: 16px;
+  --colIntIos: white;
+  --colIntIosOnBk: #2acc2a;
+  --colIntIosOnBkFc: #1bbb1b;
+  --colIntIosOffBk: #dbdbdb;
+  --colIntIosOffBkFc: #BDBDBD;
+  --md-sys-typescale-label-large-weight-prominent:
+    var(--md-ref-typeface-weight-bold);
+  --md-box_shadow_level2:
+    0 1px 0 var(--md-sys-elevation-level2) var(--md-sys-color-shadow);
+  --md-box_shadow_level1:
+    0 1px 0 var(--md-sys-elevation-level1) var(--md-sys-color-shadow);
+  --md-box_shadow_level0: none;
+  --iconSize: 24px;
+  --avatarSize: 40px;
+  --imageSize: 56px;
+  --videoWidth: 114px;
+  --videoHeight: 64px;
+  /* Pressed state layer opacity */
+  --state-pressed-transparency-percentage: 84%;
+  /* Focus state layer opacity */
+  --state-focus-transparency-percentage: 88%;
+  /* Hover state layer opacity */
+  --state-hover-transparency-percentage: 92%;
+  /* label - small */
+  --md-sys-typescale-label-small-font-family-name: var(--Font);
+  /* label - medium */
+  --md-sys-typescale-label-medium-font-family-name: var(--Font);
+  /* label - large */
+  --md-sys-typescale-label-large-font-family-name: var(--Font);
+  /* body - small */
+  --md-sys-typescale-body-small-font-family-name: var(--Font);
+  /* body - medium */
+  --md-sys-typescale-body-medium-font-family-name: var(--Font);
+  /* body - large */
+  --md-sys-typescale-body-large-font-family-name: var(--Font);
+  /* headline - small */
+  --md-sys-typescale-headline-small-font-family-name: var(--Font);
+  /* headline - medium */
+  --md-sys-typescale-headline-medium-font-family-name: var(--Font);
+  /* headline - large */
+  --md-sys-typescale-headline-large-font-family-name: var(--Font);
+  /* display - small */
+  --md-sys-typescale-display-small-font-family-name: var(--Font);
+  /* display - medium */
+  --md-sys-typescale-display-medium-font-family-name: var(--Font);
+  /* display - large */
+  --md-sys-typescale-display-large-font-family-name: var(--Font);
+  /* title - small */
+  --md-sys-typescale-title-small-font-family-name: var(--Font);
+  /* title - medium */
+  --md-sys-typescale-title-medium-font-family-name: var(--Font);
+  /* title - large */
+  --md-sys-typescale-title-large-font-family-name: var(--Font);
+}
+
+p {
+  margin: 16px;
+}
+
+a {
+  color: var(--md-sys-color-on-background);
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    --md-riple-color: #00000020;
+    --md-sys-color-surface-container-low: var(--md-ref-palette-neutral95);
+    --md-sys-color-surface-container-highest: var(--md-ref-palette-neutral90);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --md-riple-color: #ffffff40;
+    --md-sys-color-surface-container-low: var(--md-ref-palette-neutral20);
+    --md-sys-color-surface-container-highest: var(--md-ref-palette-neutral30);
+  }
+}
+
+@keyframes fouc {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+.Titulo{
+  display:flex;
+  font-size: 1.5em;
+  font-family: "Protest Strike", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #783b6c;
+  justify-content: center;
+}
+
+.Titulo1 {
+  display: inline;
+  font-size: 1.5em;
+  font-family: "Protest Strike", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #783b6c;
+  margin: 0.5em;
+}
+
+.Titulo1 img {
+  vertical-align: middle; /* Alinea verticalmente la imagen con el texto */
+  margin-right: 35px; /* Ajusta el margen derecho según sea necesario */
+  margin-bottom: 2.8px;
+}
+
+
+.imagenTitulo{
+  margin-right: 5px; 
+  height: 1.4em;
+}
+
+.titulosSecundarios{
+  display: inline;
+  font-size: 1.5em;
+  font-family: "Protest Strike", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #783b6c;
+  margin: 0.5em;
+  text-align: left;
+}
+
+.titulosSecundarios img {
+  vertical-align: middle; /* Alinea verticalmente la imagen con el texto */
+  margin-right: 2px; /* Ajusta el margen derecho según sea necesario */
+  margin-bottom: 2.8px;
+}
+.titulosSecundarios1{
+  display:flex;
+  font-size: 1.5em;
+  font-family: "Protest Strike", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #783b6c;
+}
+
+.titulosSecundarios2 {
+  text-align: center;
+  display: flex;
+  justify-content: center; 
+  font-size: 1.5em;
+  font-family: "Protest Strike", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #783b6c;
+}
+
+
+.slider-container img {
+  scroll-snap-align: center;
+}
+
+.slider-container {
+  display: flex;
+  width: 90%;
+  height: 130px;
+  margin: auto;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+
+}
+
+.slider-container img {
+  flex: 0 0 100%;
+  width: 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
+}
+
+
+/* Estilos para el contenedor principal */
+.contenedor {
+  background-color: #ffffff; /* Color de fondo */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  margin-bottom: 20px; /* Margen inferior */
+  text-align: center; /* Centra el contenido */
+}
+
+/* Estilos para la imagen */
+.imagen img {
+  width: 80%; /* Ancho del 80% del contenedor */
+  max-width: 200px; /* Máximo ancho de la imagen */
+  display: block; /* Hace que la imagen sea un bloque */
+  margin: 0 auto 10px; /* Margen automático arriba y abajo, centrando horizontalmente */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para los párrafos de estado */
+.Estado {
+  margin-bottom: 8px; /* Margen inferior */
+  color: #333333; /* Color del texto */
+  font-size: 16px; /* Tamaño de la fuente */
+  line-height: 1.4; /* Altura de línea */
+}
+
+#carrito{
+  margin:10px 0 10px 120px;
+}
+
+#compra{
+  margin:5px 10px 5px 65px;
+}
+
+#texto{
+  position: absolute;
+  margin: 10px 1px;
+}
+
+.texto{
+  position: relative;
+  margin: 1px 0;
+  text-align: justify;
+}
+
+a{
+  text-decoration:none;
+}
+
+#menuBusqueda {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    background-color: var(--md-sys-color-surface);
+    padding: 0 4px;
+    height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribuye los elementos al principio y al final */
+    box-sizing: border-box;
+}
+
+
+
+#campoBuscar {
+  width: 30%; /* Ancho del select para dispositivos móviles */
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid #c3c1c1;
+  outline: none;
+  padding: 0px 10px; /* Ajuste del relleno para dispositivos móviles */
+}
+
+#buscaInput {
+  width: 60%; /* Ancho del input para dispositivos móviles */
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid #c3c1c1;
+  outline: none;
+  padding: 0px 10px; /* Ajuste del relleno para dispositivos móviles */
+}
+
+#campoBuscar option {
+  /* Estilos generales */
+  font-size: 14px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  background-color: #fff; /* Color de fondo */
+  padding: 5px; /* Espaciado interno */
+
+  /* Estilos específicos de hover */
+  /* por ejemplo */
+  /* background-color: #f0f0f0; */
+}
+
+/* Estilos para la opción seleccionada */
+#campoBuscar option:checked {
+  /* Estilos cuando la opción está seleccionada */
+  /* por ejemplo */
+  /* background-color: #ddd; */
+}
+
+/* Estilos para el contenedor principal */
+.libro-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    text-align: center; /* Centra el texto horizontalmente */
+}
+
+/* Estilos para la imagen */
+#imagen {
+    max-width: 100%; /* La imagen se ajustará al ancho del contenedor */
+    max-height: 300px;
+    height: 85%; /* Mantener la proporción de la imagen */
+    margin-top: 20px;
+    margin-bottom: 20px; /* Espacio inferior */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilos para el contenedor de detalles */
+.detalles {
+    max-width: 80%; /* Ancho máximo para los detalles */
+}
+
+/* Estilos para cada detalle del libro */
+.detalle {
+    margin-bottom: 10px; /* Espacio inferior entre los detalles */
+}
+
+.detalle label{
+    font-weight: 800;
+    color: #000;
+}
+
+/* Estilos para la reseña */
+.resena {
+    margin-top: 20px; /* Espacio superior */
+    text-align: justify; /* Alinea el texto a la izquierda */
+    margin-bottom: 100px;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    cursor: pointer;
+    color: #007bff; /* Color azul para el enlace */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.toggle-label:hover {
+    text-decoration: underline; /* Subrayar el enlace al pasar el cursor */
+}
+
+.toggle-checkbox:checked + .resena .resena-content {
+    display: block;
+}
+
+.resena-content {
+    display: none;
+    margin-top: 10px; /* Espacio superior */
+}
+
+.botonesIconos{
+  display: flex;
+  align-items: center;
+}
+
+.botonIcono button {
+    display: flex;
+    align-items: center; /* Alinea los elementos verticalmente */
+    gap: 8px; /* Espacio entre el icono y el texto */
+    margin-right: 5px ;
+    margin-bottom: 10px
+}
+
+.botonIcono button .material-symbols-outlined {
+    font-size: 24px; /* Tamaño del icono */
+}
+
+/* Estilos generales para el carrito */
+.carrito {
+    font-family: Arial, sans-serif; /* Fuente limpia y moderna */
+    color: #333; /* Color de texto oscuro para legibilidad */
+    background-color: #f7f7f7; /* Fondo claro */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    margin-top: 20px; /* Margen superior */
+}
+
+/* Estilos para los elementos individuales del carrito */
+.item-carrito {
+    display: flex; /* Mostrar los elementos en línea */
+    align-items: center; /* Alinear verticalmente los elementos */
+    margin-bottom: 20px; /* Margen inferior entre elementos */
+}
+
+.imagen-libro {
+    width: 100px; /* Ancho fijo para la imagen */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin-right: 20px; /* Margen derecho de la imagen */
+}
+/* Estilos para los botones de incremento y decremento */
+.item-carrito button {
+    background-color: #f2f2f2; /* Color de fondo claro */
+    color: #333; /* Color de texto oscuro */
+    border: 1px solid #ccc; /* Borde sutil */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 8px 12px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de mano al pasar el mouse */
+    font-size: 16px; /* Tamaño de fuente legible */
+    margin: 0 5px; /* Margen entre botones */
+}
+
+/* Estilo para el input de cantidad */
+.item-carrito input[type="number"] {
+    width: 50px; /* Ancho fijo para el input */
+    text-align: center; /* Texto centrado */
+    border: 1px solid #ccc; /* Borde sutil */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 8px; /* Espaciado interno */
+    margin: 0 5px; /* Margen entre input y botones */
+}
+
+/* Estilo para el botón de eliminar */
+.item-carrito .eliminar-button {
+    background-color: #cd0e0e; /* Color rojo para el botón */
+    color: white; /* Texto blanco para contraste */
+    margin-top: 20px;
+    border: none; 
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 8px 12px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de mano al pasar el mouse */
+    font-size: 16px; /* Tamaño de fuente legible */
+    margin-left: auto; /* Alinear a la derecha */
+}
+
+.g-recaptcha{
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+}
+
+#iconoFav{
+  position: relative;
+  display: grid;
+  place-items: center;
+  left: 72%;
+  padding: 8px;
+  background: #ffff;
+  border-radius: 100%;
+  margin-bottom: 5px;
+  border: none;
+}
+
+
+
+.contenedor-fav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%; /* Ancho del contenedor de tarjetas */
+  margin-top: 20px;
+}
+
+.favorito-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.favorito-card img {
+  width: 100px;
+  height: 135px;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+.favorito-info {
+  padding: 20px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+.favorito-titulo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.favorito-autor,
+.favorito-isbn {
+  font-size: 16px;
+  color: #666;
+}
+
+/*  */

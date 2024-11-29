@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Detalles - PIXEL PARADISE</title>
+  <meta name="theme-color" content="#fffbfe" />
+  <link rel="icon" sizes="32x32" href="favicon.ico" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="css/estilos.css" />
+  <script type="module" src="js/configura.js"></script>
+  <script type="module" src="lib/js/ejecuta.js"></script>
+  <script type="module" src="lib/js/submitForma.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+  <script type="module" src="lib/js/muestraObjeto.js"></script>
+  <script type="module" src="lib/js/confirmaEliminar.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=Ab5BjLoXdav1GgucDofsedwUwAU2smy0Jz5ICLb5lnAG951mJhkVXGSwGZGqYP4PJSe5fyohiVEChUaj"></script>
+   <script type="module" src="./js/custom/mi-nav.js"></script>
+   <script type="module" src="./js/Sesion.js"></script>
+  <script>
+    // Obtiene los parámetros de la página.
+    const parametros = new URL(location.href).searchParams;
+
+    // Función para agregar un libro al carrito de compras
+    function agregarAlCarrito() {
+      // Obtener los detalles del libro desde la página
+      const id = document.getElementById('id').innerText;
+      const titulo = document.getElementById('titulo').innerText;
+      const precio = parseFloat(document.getElementById('precio').innerText.replace('$', ''));
+      const imagen = document.getElementById('imagen').src;
+
+      // Crear un objeto con los detalles del libro
+      const libro = {
+        id: id,
+        titulo: titulo,
+        precio: precio,
+        imagen: imagen,
+         cantidad: 1 // Inicializa con una cantidad de 1
+      };
+
+      // Agregar el libro al carrito de compras (usando localStorage en este ejemplo)
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.push(libro);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+
+      // Mostrar un mensaje de éxito al usuario
+      alert(`"${titulo}" se ha agregado al carrito.`);
+
+  
+    }
+
+  </script>
+</head>
+  
+<body onload="cargarSesion(); cargarLibros();">
+  
+<!-- Comienzo de la barra de navegación -->
+<md-top-app-bar adicional="tab" headline="h1Headline">
+  <button type="button" title="Buscar" slot="action" id="botonBuscar" class="md-standard-icon-button">
+    <span class="material-symbols-outlined">search</span>
+  </button>
+  <button type="button" title="Perfil" slot="action" class="md-standard-icon-button" onclick="window.location.href = 'inicioSesion.html';">
+    <span class="material-symbols-outlined">account_circle</span>
+  </button>
+  <h1 class="titulosSecundarios">
+    <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">Detalles
+  </h1>
+</md-top-app-bar>
+
+  <h1 id="h1Headline" class="titulosSecundarios1">
+  <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos" id="h1Headline">Detalles</h1>
+  
+  <mi-nav id="nav" class="center-aligned"></mi-nav>
+  <!-- Fin de la barra de navegación -->
+  
+<main>
+  <form id="forma">
+      <div class="libro-info">
+          <img src="" id="imagen" alt="Imagen del libro">
+
+        <div class="botonesIconos">
+            <!-- <div class="botonIcono">
+                <button class="md-outline-button">
+                    <span class="material-symbols-outlined" title="Realizar pago">payments</span>
+                    Comprar
+                </button>
+            </div> -->
+            <div class="botonIcono">
+                <button class="md-filled-button" id="botonAgregarAlCarrito" onclick="agregarAlCarrito()">
+                    <span class="material-symbols-outlined" title="Agregar al carrito">add_shopping_cart</span>
+                    Agregar al carrito
+                </button>
+            </div>
+        </div>
+        
+         <!-- CONTENEDOR API PAYPAL  -->
+          <div id="paypal-button-container"></div>
+
+        <!-- CONTENEDOR DE INFORMACION DEL LIBRO CON DETALLES -->
+          <div class="detalles">
+              <input type="hidden" id="id" name="id"> 
+            <div class="detalle">
+                <label for="titulo">Título:</label>
+                <span id="titulo">Cargando&hellip;</span>
+            </div>
+
+              <div class="detalle">
+                  <label for="categoria">Categoría:</label>
+                  <span id="categoria">Cargando&hellip;</span>
+              </div>
+              <div class="detalle">
+                  <label for="precio">Precio:</label>
+                  <span id="precio">Cargando&hellip;</span>
+              </div>
+            <input type="checkbox" id="toggle-resena" class="toggle-checkbox">
+            <div class="detalle resena">
+              <label for="resena">Reseña:</label>
+                <label for="toggle-resena" class="toggle-label">Ver más</label>
+                <span id="resena" class="resena-content">Cargando&hellip;</span>
+            </div
+          </div>
+      </div>
+  </form>
+</main>
+  
+  <script>
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+          // Obtener el precio del producto desde el elemento HTML
+          var precio = parseFloat(document.getElementById('precio').innerText.replace('$', ''));
+
+          // Configurar la transacción con el precio obtenido
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: precio.toFixed(2) // Asegurarse de que el precio tenga dos decimales
+                  }
+              }]
+          });
+      },
+      onApprove: function(data, actions) {
+        // Captura la aprobación de la transacción
+        return actions.order.capture().then(function(details) {
+          // Aquí puedes realizar acciones adicionales después de que se haya completado la transacción
+          alert('Transacción completada por ' + details.payer.name.given_name + '!');
+        });
+      }
+    }).render('#paypal-button-container'); // Renderiza el botón en el contenedor
+  </script>
+  
+  <script>
+    function cargarSesion() {
+    ejecuta('srv/srvSesion.php')
+      .then(objeto => {
+       const sesion = new Sesion(objeto)
+       nav.sesion = sesion
+      })
+      .catch(muestraError);
+    }
+
+    function cargarLibros() {
+      ejecuta('srv/srvLibroMuestra.php?' + parametros)
+      .then(objeto => {
+        muestraObjeto(forma, objeto);
+        document.getElementById('imagen').src = objeto.imagen;
+      })
+      .catch(muestraError);
+    }
+  </script>
+<nav-bar></nav-bar>
+</body>
+</html>

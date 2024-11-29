@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Catalogo - PIXEL PARADISE</title>
+  <meta name="description" content="PIXEL PARADISE" />
+  <meta name="theme-color" content="#fffbfe" />
+  <link rel="icon" sizes="32x32" href="favicon.ico"/>
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="css/estilos.css" />
+  <!-- Funciones en javascript -->
+  <script src="ungap/custom-elements.js"></script>
+  <script type="module" src="js/configura.js"></script>
+  <script type="module" src="lib/js/ejecuta.js"></script>
+  <script type="module" src="lib/js/submitForma.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+  <script type="module" src="lib/js/muestraInnerHtml.js"></script>
+   <script type="module" src="./js/custom/mi-nav.js"></script>
+   <script type="module" src="./js/Sesion.js"></script>
+  <!-- Enlace a Google Fonts para la tipografía Pacifico -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+  <style>
+    /* Estilos para el contenedor del escáner y la línea roja */
+    #scanner-container {
+      display: none; /* Inicialmente oculto */
+      position: absolute;
+      top: 4rem;
+      left: 0;
+      width: 100%;
+      max-height: 80vh;
+      align-items: center;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .mostrar-scanner { /* Clase para mostrar el contenedor del escáner */
+      display: flex;
+    }
+
+    #line {
+      width: 100%;
+      border-top: 1px solid red;
+      position: absolute;
+      top: 0; /* Comienza en la parte superior del contenedor */
+      animation: moverLinea 2s infinite; /* Animación para mover la línea */
+      z-index: 5;
+    }
+
+    @keyframes moverLinea {
+      0% { top: 0; } /* Empieza en la parte superior */
+      100% { top: 100%; } /* Termina en la parte inferior */
+    }
+  </style>
+</head>
+
+<body onload="cargarSesion(); cargarLibros();">
+
+  <div id="menuBusqueda" style="top: -100%;">
+    <div class="busqueda" > 
+      <select id="campoBuscar">
+        <option value="titulo">Título</option>
+        <option value="isbn">Codigo de barras</option>
+        <option value="autor">Autor</option>
+      </select>
+      <input type="text" id="buscaInput" class="resultado" placeholder="Buscar...">
+    </div>
+    <button type="button" title="Buscar" slot="action" id="botonBuscar2" class="md-standard-icon-button">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+    <button id="botonEscaneo" slot="action" type="button" title="Escanear código de barras" class="md-standard-icon-button" onclick="toggleEscaneo()">
+      <span class="material-symbols-outlined">barcode_scanner</span>
+    </button>
+  </div>
+
+  <!-- Comienzo de la barra de navegacion -->
+  <md-top-app-bar adicional="tab"  headline="h1Headline">
+    
+    <button type="button" title="Buscar" slot="action" id="botonBuscar" class="md-standard-icon-button"> <span class="material-symbols-outlined">search</span></button>
+    
+    <button type="button" title="Perfil" slot="action" class="md-standard-icon-button" onclick="window.location.href = 'inicioSesion.html';">
+      <span class="material-symbols-outlined">account_circle</span>
+    </button>
+    
+    <h1  class="titulosSecundarios"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">VIDEOJUEGOS</h1>
+    
+  </md-top-app-bar>
+  
+  <h1 id="h1Headline" class="titulosSecundarios1"><img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos" >VIDEOJUEGOS</h1>
+  
+  <mi-nav id="nav" class="center-aligned"></mi-nav>
+  <!-- <nav-tab-fixed class="center-aligned"></nav-tab-fixed> -->
+  <!-- Fin de la barra de navegacion -->
+
+  <main>
+    
+   <!-- <p><a href="agregar.html">Agregar</a></p>-->
+    <div id="noResultados" style="display: none;">No se encontraron resultados.</div>
+    <!-- Este div mostrará el mensaje cuando no se encuentren resultados -->
+    <div id="lista" class="md-cards">
+      <!-- Contenido de los libros -->
+      <div class="card" data-titulo="" data-autor="" data-isbn="" data-imagen="">
+        <figure>
+          <img src="" alt="">
+          <progress max="100">Cargando…</progress> 
+        </figure>
+        <div class="info">
+          <span class='titulo'><progress max="100">Cargando…</progress></span>
+          <span class='autor'><progress max="100">Cargando…</progress></span>
+          <span class='precio'><progress max="100">Cargando…</progress></span>
+          <input type='hidden' class='isbn' value=''>
+        </div>
+        <button onclick="agregarAFavoritos(event)"><span class="material-symbols-outlined">
+          favorite
+          </span></button>
+      </div>
+    </div>
+    
+    <div id="scanner-container"></div>
+    <div id="line" style="display:none;"></div>
+  </main>
+
+  <script src="js/busqueda.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/escaner.js"></script>
+  <script src="js/favoritos.js"></script>
+  <script>
+    function cargarSesion() {
+    ejecuta('srv/srvSesion.php')
+      .then(objeto => {
+       const sesion = new Sesion(objeto)
+       nav.sesion = sesion
+      })
+      .catch(muestraError);
+    }
+
+    function cargarLibros() {
+      ejecuta('srv/srvLibroConsulta.php')
+        .then(render => muestraInnerHtml(lista, render))
+        .catch(muestraError);
+    }
+  </script>
+ 
+  <nav-bar></nav-bar>
+</body>
+</html>

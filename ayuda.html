@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+
+  <title>
+    Ayuda - PIXEL PARADISE
+  </title>
+
+  <meta name="description" content="PIXEL PARADISE">
+  <meta name="theme-color" content="#fffbfe">
+
+  <link rel="icon" sizes="32x32" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <script src="ungap/custom-elements.js"></script>
+  <script type="module" src="js/configura.js"></script>
+   <script type="module" src="./js/custom/mi-nav.js"></script>
+   <script type="module" src="./js/Sesion.js"></script>
+  <script type="module" src="lib/js/ejecuta.js"></script>
+
+</head>
+
+<body onload="ejecuta('srv/srvSesion.php')
+  .then(objeto => {
+    const sesion = new Sesion(objeto)
+      nav.sesion = sesion
+  })
+  .catch(muestraError)">
+
+  <!-- Comienzo de la barra de navegacion -->
+  <md-top-app-bar adicional="tab" class="center-aligned" headline="h1Headline">
+
+    <button type="button" title="Buscar" slot="action" id="botonBuscar" class="md-standard-icon-button">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+
+
+    <button type="button" title="Perfil" slot="action" class="md-standard-icon-button" onclick="window.location.href = 'inicioSesion.html';">
+      <span class="material-symbols-outlined">account_circle</span>
+    </button>
+
+    <h1 class="titulosSecundarios"  > <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">AYUDA</h1>
+
+  </md-top-app-bar>
+
+   <h1 id="h1Headline" class="titulosSecundarios1"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos" Id="h1Headline"> AYUDA </h1>
+  
+   <mi-nav id="nav" class="center-aligned"></mi-nav>
+<!-- //fin de la barra de navegacion -->
+
+<main>
+
+  <ul class="md-list">
+    <li class="md-two-line">
+      <span class="headline">
+        Título
+      </span>
+      <span class="supporting">
+        PIXEL PARADISE
+      </span>
+    </li>
+    <li class="md-three-line">
+      <span class="headline">
+        Descripción
+      </span>
+        <span class="texto">
+          Pixel Paradise es una aplicación móvil revolucionaria que te lleva al siguiente nivel en la experiencia de los videojuegos y la lectura. Diseñada para los amantes de la diversión interactiva, esta plataforma no solo te permite explorar una amplia colección de títulos de la reconocida librería Pacífico, sino que también te sumerge en un mundo lleno de desafíos y aprendizaje.
+
+          Con emocionantes minijuegos educativos, Pixel Paradise transforma la práctica de la ortografía en una aventura inolvidable. Enfréntate a retos únicos, desbloquea logros y sube de nivel mientras perfeccionas tus habilidades lingüísticas de una manera divertida y dinámica.
+
+          Además, Pixel Paradise incluye un espacio de juego narrativo donde puedes crear y personalizar tu propio diario virtual. Vive una experiencia inmersiva escribiendo y reviviendo tus historias diarias en un entorno lleno de creatividad y exploración. ¡Crea un refugio personal para tus ideas y recuerdos, todo en un universo gamificado que te invita a descubrir, aprender y crecer!
+
+          Prepárate para explorar este innovador mundo donde la lectura y los videojuegos convergen. ¡Pixel Paradise: juega, aprende y vive la aventura de tus sueños! 🎮📚✨
+        </span>
+    </li>
+    
+    <li class="md-three-line">
+      <span class="headline">
+        Autores
+      </span>
+      <span class="supporting">
+        MARTÍNEZ SALINAS GABRIELA EDITH<br />
+        MÉNDEZ ROMERO ÁNGEL YAEL
+      </span>
+      <span class="supporting">
+        PÉREZ OLIVER CARLOS ERNESTO<br />
+        ROJAS PÉREZ MELISA<br>
+        SOLÍS MORALES JORGE AARÓN
+      </span>
+
+    </li>
+    <li class="md-two-line">
+      <span class="headline">
+        Derechos de autor
+      </span>
+      <span class="supporting">
+        &copy; 2024
+        InnoTech
+      </span>
+    </li>
+    <li class="md-three-line">
+      <span class="headline">
+        Este software usa la tienda de Videojuegos
+        para PWA
+      </span>
+      <span class="supporting">
+        Esta obra de
+        Gilberto Pacheco Gallegos
+        está bajo una
+        <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by/4.0/">Licencia
+          Creative Commons Atribución
+          4.0 Internacional</a> </span>
+    </li>
+    <li>
+      <a class="md-three-line" target="_blank" href="https://fonts.google.com/icons">
+        <span class="headline">
+          También usa Material Symbols
+        </span>
+        <span class="supporting">
+          Desarrollada por Google bajo
+          licencia Apache 2.0
+        </span>
+      </a>
+    </li>
+  </ul>
+
+</main>
+
+</body>
+
+</html>

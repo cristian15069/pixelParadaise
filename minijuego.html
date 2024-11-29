@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Minijuego - PIXEL PARADISE</title>
+    <meta name="description" content="PIXEL PARADISE" />
+    <meta name="theme-color" content="#fffbfe" />
+    <link rel="icon" sizes="32x32" href="favicon.ico" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <meta name="apple-mobile-web-app-title" content="PIXEL PARADISE" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="img/maskable_icon.png" />
+
+    <!-- adaptacion a IOS -->
+    <link rel="apple-touch-icon" sizes="48x48" href="img/maskable_icon_x48.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="img/maskable_icon_x72.png" />
+    <link rel="apple-touch-icon" sizes="96x96" href="img/maskable_icon_x96.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="img/maskable_icon_x128.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="img/maskable_icon_x192.png" />
+    <link rel="apple-touch-icon" sizes="384x384" href="img/maskable_icon_x384.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="img/maskable_icon_x512.png" />
+
+    <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="css/minijuego.css" />
+    <!-- Funciones en javascript -->
+    <script src="ungap/custom-elements.js"></script>
+    <script type="module" src="js/configura.js"></script>
+    <script type="module" src="lib/js/ejecuta.js"></script>
+    <script type="module" src="lib/js/submitForma.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
+    <script type="module" src="lib/js/muestraInnerHtml.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+   <script type="module" src="./js/custom/mi-nav.js"></script>
+   <script type="module" src="./js/Sesion.js"></script>
+    <!-- Enlace a Google Fonts para la tipografía Pacifico -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+</head>
+
+<body onload="ejecuta('srv/srvSesion.php')
+  .then(objeto => {
+    const sesion = new Sesion(objeto)
+      nav.sesion = sesion
+  })
+  .catch(muestraError)">
+  
+    <!-- Comienzo de la barra de navegacion -->
+    <md-top-app-bar adicional="tab" headline="h1Headline">
+        <button type="button" title="Perfil" slot="action" class="md-standard-icon-button"
+            onclick="window.location.href = 'inicioSesion.html';">
+            <span class="material-symbols-outlined">account_circle</span>
+        </button>
+        <h1 class="Titulo1"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">Juego del Ahorcado </h1>
+    </md-top-app-bar>
+  <h1 id="h1Headline" class="titulosSecundarios1"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">Juego del Ahorcado </h1>
+   <mi-nav id="nav" class="center-aligned"></mi-nav>
+    <!-- Fin de la barra de navegacion -->
+    <main>
+        <div id="app">
+            <div>
+     
+                <figure>
+                    <img :src="imagePath()" alt="">
+                </figure>
+              <h3>Palabra:</h3>
+              <h4>{{displayWord()}}</h4>
+              <p>Número de intentos: {{remainingAttempts}}</p>
+            </div>
+            <div>
+                <button :disabled="letter.disabled" @click="attemptWithLetter(letter.letter)"
+                    v-for="letter in letters">{{letter.letter}}</button>
+            </div>
+        </div>
+    </main>
+  
+    <script src="js/menu.js"></script>
+
+    <nav-bar></nav-bar>
+
+</body>
+<script src="js/vue.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/game.js"></script>
+
+</html>

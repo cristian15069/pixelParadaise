@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport"
+   content="width=device-width">
+
+ <title>Registrar cuenta</title>
+  
+   <script type="module" src="lib/js/ejecuta.js"></script>
+   <script type="module" src="lib/js/submitForma.js"></script>
+   <script type="module" src="lib/js/muestraError.js"></script>
+   <!-- Configuración de todas las páginas y colores con CSS. -->
+   <link rel="stylesheet" href="css/estilos.css">
+   <!-- Para manejar customized built-in elements en Safari -->
+   <script src="ungap/custom-elements.js"> </script>
+   <!-- Configuración de todas las páginas con JavaSript. -->
+   <script type="module" src="js/configura.js"></script>
+  
+  <meta name="theme-color"
+   content="#fffbfe">
+ <link rel="icon" sizes="32x32"
+   href="favicon.ico">
+ <link rel="manifest"
+   href="site.webmanifest">
+
+ <link rel="stylesheet"
+   href="css/estilos.css">
+ <script
+   src="ungap/custom-elements.js">
+   </script>
+
+</head>
+
+<body>
+
+ <md-top-app-bar adicional="tab" headline="h1Headline">
+    <button type="button" title="Regresar" slot="navigation" class="md-standard-icon-button" onclick="window.location.href='index.html'">
+       <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+   
+   <h1 class="titulosSecundarios2">
+      <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos" >REGISTRAR CUENTA
+    </h1>
+ </md-top-app-bar>
+
+   <h1 id="h1Headline" class="titulosSecundarios2">
+     <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos" >REGISTRAR CUENTA
+   </h1>
+  
+   <main>
+      <form id="forma"
+        onsubmit="submitForma('srv/srvUsuarioAgrega.php', event, forma)
+        .then(objeto => location.href = 'inicioSesion.html')
+        .catch(muestraError)" method="POST">
+
+       <md-filled-text-field>
+        <label for="nombre">Nombre*</label>
+        <input id="nombre" slot="input-text" required name="Nombre"  title="Introduce solo caracteres">
+        <small slot="supporting">*Requerido</small>
+       </md-filled-text-field>
+
+       <md-filled-text-field>
+        <label for="apellido_paterno">Apellido Paterno*</label>
+        <input id="apellido_paterno" slot="input-text" required name="ApellidoPaterno"  title="Introduce solo caracteres">
+         <small slot="supporting">*Requerido</small>
+       </md-filled-text-field>
+
+       <md-filled-text-field>
+         <label for="apellido_materno">Apellido Materno*</label>
+         <input id="apellido_materno" slot="input-text" required name="ApellidoMaterno"  title="Introduce solo caracteres">
+          <small slot="supporting">*Requerido</small>
+        </md-filled-text-field>
+       
+       <md-filled-text-field>
+        <label for="correo_electronico">Correo Electronico*</label>
+        <input id="correo_electronico" name="CorreoElectronico" slot="input-text" required>
+         <small slot="supporting">*Requerido</small>
+       </md-filled-text-field>
+       
+
+       <md-filled-text-field>
+        <label for="contrasena">Contraseña*</label>
+          <input id="contrasena"  type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$" title="La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial." name="contrasena" slot="input-text" required>
+         <small slot="supporting">*Requerido</small>
+       </md-filled-text-field>
+       
+       <md-filled-text-field>
+        <label for="confirmarcontrasena">Confirmar Contraseña*</label>
+         <input id="confirmarcontrasena"  type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$" title="La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial." name="confirmarcontrasena" slot="input-text" required>
+         <small slot="supporting">*Requerido</small>
+       </md-filled-text-field>
+
+        <md-filled-text-field>
+         <label for="direccion">Dirección*</label>
+         <input id="direccion" name="Direccion" slot="input-text" required>
+          <small slot="supporting">*Requerido</small>
+        </md-filled-text-field>
+
+
+        <button  type="submit" title="Registrar cuenta" slot="action" class="md-filled-button"style="width: 90%; margin:0 15px;">Registrar cuenta </button>
+     </form>
+
+ <nav-drw id="nav"></nav-drw>
+
+</body>
+
+</html>

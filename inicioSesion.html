@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+ <title>Iniciar sesión- PIXEL PARADISE</title>
+ <link rel="icon" sizes="32x32" href="favicon.ico" />
+ <link rel="manifest" href="site.webmanifest" />
+ <link rel="stylesheet" href="css/estilos.css" />
+ <!-- Funciones en javascript -->
+ <script src="ungap/custom-elements.js"></script>
+ <script type="module" src="js/configura.js"></script>
+ <script type="module" src="lib/js/ejecuta.js"></script>
+ <script type="module" src="lib/js/submitForma.js"></script>
+ <script type="module" src="lib/js/muestraError.js"></script>
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- Enlace a Google Fonts para la tipografía Pacifico -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body onload="ejecuta('srv/srvSesion.php')" >
+
+   <md-top-app-bar adicional="tab" headline="h1Headline">
+     <h1  class="titulosSecundarios"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">INICIAR SESION </h1>
+
+     
+     <button type="button" title="regreso a inicio" slot="navigation" class="md-standard-icon-button" onclick="window.location.href = 'index.html';">
+       <span class="material-symbols-outlined">arrow_back</span>
+     </button>
+     
+    </md-top-app-bar>
+  
+  <h1 id="h1Headline" class="titulosSecundarios"><img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">INICIAR SESION </h1>
+  
+<main>
+    
+ <form id="login" action="srv/srvLogin.php" method="POST" onsubmit="return validarCaptcha(event)">
+   
+   <md-filled-text-field>
+    <label for="cue"
+      accesskey="C">
+     Cue
+    </label>
+    <input id="cue" slot="input-text" name="cue" type="text" required>
+   </md-filled-text-field>
+   
+   <md-filled-text-field>
+    <label for="match"
+      accesskey="M">
+      Match
+    </label>
+    <input id="match" slot="input-text" name="match" type="password" required>
+   </md-filled-text-field>
+
+
+  <div class="g-recaptcha" data-sitekey="6LdpPJopAAAAAAzJm0Q8ZpCkXFKlygSZE0_IN20U" ></div>
+
+  <button type="submit" class="md-filled-button" style="width: 90%; margin:0 15px;">Iniciar Sesion</button>
+ 
+ </form>
+
+    <p style="text-align:center;font-family: Arial, sans-serif; color: #333; margin: 10px 0 0;">
+      ¿No tienes cuenta? <a href="registrar.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Registrarse</a>
+    </p>
+  
+
+  </main>
+  
+ <script>
+   function validarCaptcha(event) {
+     const response = grecaptcha.getResponse();
+     if (response === "") {
+       alert("Por favor, completa el captcha.");
+       return false;
+     }
+
+     
+     // var formulario = document.getElementById("login");
+     // submitForma('srv/srvLogin.php', event, formulario)
+     //   .then(json => location.href = 'perfil.html')
+     //   .catch(muestraError);
+     return true;
+   }
+ </script>
+
+</body>
+
+</html>

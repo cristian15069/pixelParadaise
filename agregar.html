@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Agregar</title>
+
+  <script type="module" src="lib/js/ejecuta.js"></script>
+  <script type="module" src="lib/js/submitForma.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+</head>
+
+<body>
+  <form method="POST" id="forma" onsubmit="submitForma('srv/srvLibroAgrega.php', event, forma)
+   .then(objeto => location.href = 'catalogo.html')
+   .catch(muestraError)" enctype="multipart/form-data">
+
+    <h1>Agregar</h1>
+
+    <p><a href="index.html">Cancelar</a></p>
+
+    <p>
+      <label>
+        imagen *
+        <input name="imagen" type="file" required />
+      </label>
+    </p>
+    <p>
+      <label>
+        Titulo *
+        <input name="titulo" required />
+      </label>
+    </p>
+    <p>
+      <label>
+        DESARROLLADOR *
+        <input name="autor" required />
+      </label>
+    </p>
+    <p>
+      <label>
+        CODIGO DE BARRAS*
+        <input name="isbn" required />
+      </label>
+    </p>
+    <p>
+      <label>
+        Año de creación*
+        <input name="edicion" type="number" required />
+      </label>
+    </p>
+    <p>
+      <label>
+        Categoria *
+        <input name="categoria" required />
+      </label>
+    </p>
+    <p>
+    <p>
+      <label>
+        Reseña *
+        <input name="resena" required />
+      </label>
+    </p>
+    <p>
+      <label>
+        Precio *
+        <input name="precio" type="number" step="0.01" required />
+      </label>
+    </p>
+
+    <p>* Obligatorio</p>
+
+    <p><button type="submit">Agregar</button></p>
+  </form>
+</body>
+
+</html>

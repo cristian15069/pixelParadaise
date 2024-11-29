@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Inicio - PIXEL PARADISE</title>
+  <meta name="description" content="PIXEL PARADISE" />
+  <meta name="theme-color" content="#fffbfe" />
+  <link rel="icon" sizes="32x32" href="favicon.ico" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta name="apple-mobile-web-app-title" content="PIXEL PARADISE" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="apple-touch-icon" href="img/maskable_icon.png" />
+
+  <!-- adaptacion a IOS -->
+  <link rel="apple-touch-icon" sizes="48x48" href="img/maskable_icon_x48.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="img/maskable_icon_x72.png" />
+  <link rel="apple-touch-icon" sizes="96x96" href="img/maskable_icon_x96.png" />
+  <link rel="apple-touch-icon" sizes="128x128" href="img/maskable_icon_x128.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="img/maskable_icon_x192.png" />
+  <link rel="apple-touch-icon" sizes="384x384" href="img/maskable_icon_x384.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="img/maskable_icon_x512.png" />
+
+  <link rel="stylesheet" href="css/estilos.css" />
+  <!-- Funciones en javascript -->
+  <script src="ungap/custom-elements.js"></script>
+  <script type="module" src="js/configura.js"></script>
+  <script type="module" src="lib/js/ejecuta.js"></script>
+  <script type="module" src="lib/js/submitForma.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+  <script type="module" src="lib/js/muestraInnerHtml.js"></script>
+   <script type="module" src="./js/custom/mi-nav.js"></script>
+   <script type="module" src="./js/Sesion.js"></script>
+  <!-- Enlace a Google Fonts para la tipografía Pacifico -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"/>
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
+
+</head>
+  
+  <body onload="cargarSesion(); cargarLibros();">
+  
+  <div id="menuBusqueda" style="top: -100%;">
+    <div class="busqueda" > 
+
+    <select id="campoBuscar">
+      <option value="titulo">Título</option>
+      <option value="isbn">Codigo de barras</option>
+      <option value="autor">Desarrollador</option>
+    </select>
+    <input type="text" id="buscaInput" class="resultado" placeholder="Buscar...">
+  </div>
+
+    <button type="button" title="Buscar" slot="action" id="botonBuscar2" class="md-standard-icon-button">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+
+    <button id="botonEscaneo" slot="action" type="button" title="Escanear código de barras" class="md-standard-icon-button">
+    <span class="material-symbols-outlined">
+    barcode_scanner
+    </span>
+    </button>
+    </div>
+    
+   <!-- Comienzo de la barra de navegacion -->
+  <md-top-app-bar adicional="tab" class="center-aligned" >
+
+    <button type="button" title="Buscar" slot="action" id="botonBuscar" class="md-standard-icon-button">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+
+    <button type="button" title="Perfil" slot="action" class="md-standard-icon-button" onclick="window.location.href = 'perfil.html';">
+      <span class="material-symbols-outlined">account_circle</span>
+    </button>
+
+     <h1 class="Titulo1"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">PIXEL PARADISE</h1>
+  </md-top-app-bar>
+  
+  <mi-nav id="nav" class="center-aligned"></mi-nav>
+
+
+  <!-- Fin de la barra de navegacion -->
+
+<main>
+
+  <!-- contenedor de carrusel de promociones -->
+  <div class="slider-container">
+    <img class="slider-item" src="img/promocion1.png" />
+    <img class="slider-item" src="img/promocion2.png" />
+    <img class="slider-item" src="img/promocion1.png" />
+  </div>
+  <!-- finalizacion de componentes del carrusel -->
+  
+
+  <div id="noResultados" style="display: none;">No se encontraron resultados.</div>
+  <!-- Este div mostrará el mensaje cuando no se encuentren resultados -->
+  <div id="lista" class="md-cards">
+    <!-- Contenido de los libros -->
+    <div class="card" data-title="" data-author="" data-isbn="">
+      <figure>
+        <img src="" alt="Portada del libro">
+        <progress max="100">Cargando…</progress>
+      </figure>
+      <div class="info">
+        <span class='titulo'><progress max="100">Cargando…</progress></span>
+        <span class='autor'><progress max="100">Cargando…</progress></span>
+        <span class='precio'><progress max="100">Cargando…</progress></span>
+        <input type='hidden' class='isbn' value=''>
+      </div>
+    </div>
+  </div>
+
+
+</main>
+
+<script src="js/busqueda.js"></script>
+<script src="js/menu.js"></script>
+<script>
+      function cargarSesion() {
+      ejecuta('srv/srvSesion.php')
+        .then(objeto => {
+         const sesion = new Sesion(objeto)
+         nav.sesion = sesion
+        })
+        .catch(muestraError);
+      }
+
+      function cargarLibros() {
+        ejecuta('srv/srvLibroConsulta.php')
+          .then(render => muestraInnerHtml(lista, render))
+          .catch(muestraError);
+      }
+    </script>
+<nav-bar></nav-bar>
+
+</body>
+</html>

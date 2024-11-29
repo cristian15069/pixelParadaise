@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diario personal - PIXEL PARADISE</title>
+  <meta name="description" content="LibreriaCDMX">
+  <meta name="theme-color" content="#fffbfe">
+
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/diario.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="ungap/custom-elements.js"></script>
+  <script type="module" src="js/configura.js"></script>
+  <script type="module" src="lib/js/ejecuta.js"></script>
+  <script type="module" src="lib/js/submitForma.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+  <script type="module" src="lib/js/muestraInnerHtml.js"></script>
+  <script>
+    function openPopup2() {
+      document.querySelector('.popup-container2').style.display = 'block';
+    }
+
+    function closePopup2() {
+      document.querySelector('.popup-container2').style.display = 'none';
+    }
+
+    function openPopup1() {
+      document.querySelector('.popup-container1').style.display = 'block';
+    }
+
+    function closePopup1() {
+      document.querySelector('.popup-container1').style.display = 'none';
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      flatpickr("#datePicker", {
+        dateFormat: "d-m-Y", // Formato de fecha
+        defaultDate: "today", // Fecha por defecto (la fecha actual)
+        altInput: true, // Utilizar un input adicional para mostrar la fecha
+        altFormat: "j F Y", // Formato de fecha alternativo
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+
+  <md-top-app-bar adicional="tab" headline="h1Headline">
+    <button type="button" title="Buscar" slot="action" id="botonBuscar" class="md-standard-icon-button">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+    <button type="button" title="Perfil" slot="action" class="md-standard-icon-button" onclick="window.location.href = 'perfil.html';">
+      <span class="material-symbols-outlined">account_circle</span>
+    </button>
+    <h1 class="titulosSecundarios">
+      <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">Diario Videojuegos
+    </h1>
+  </md-top-app-bar>
+
+  <nav-tab-fixed class="center-aligned"></nav-tab-fixed>
+
+  <main>
+    <br>
+    <br>
+
+    <div>
+      <span onclick="habilitarInput()" class="material-symbols-outlined">post_add</span>
+      <label onclick="openPopup1()">Agregar Nota</label>
+    </div>
+    <br>
+    <div>
+      <span onclick="habilitarInput()" class="material-symbols-outlined">contract_delete</span>
+      <label onclick="openPopup2()">Modificar/Eliminar Nota</label>
+    </div>
+
+  </main>
+
+  <div class="popup-container1">
+    <div class="popup1">
+      <h2>Agregar Nota</h2>
+      <div class="date-picker">
+        <form action="#" autocomplete="off" id="forma">
+          <h3>¿Cómo fue tu experiencia hoy?</h3>
+          <div class="emoticonos-container">
+            <img src="img/emoticon_feliz.gif" alt="Emoticon feliz" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_sarcastico.gif" alt="Emoticon sarcástico" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_enamorado.gif" alt="Emoticon enamorado" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_sonador.gif" alt="Emoticon soñador" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_sorprendido.gif" alt="Emoticon sorprendido" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_nervioso.gif" alt="Emoticon nervioso" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_enojado.gif" alt="Emoticon enojado" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_confundido.gif" alt="Emoticon confundido" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_dormir.gif" alt="Emoticon dormir" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_enfermo.gif" alt="Emoticon enfermo" class="emoticonos" style="width: 30px; height: 30px;">
+            <img src="img/emoticon_espantado.gif" alt="Emoticon espantado" class="emoticonos" style="width: 30px; height: 30px;">
+          </div>
+          <textarea id="campo" name="relato" placeholder="Cuéntame tu día..." style="height: 200px;"></textarea>
+        </form>
+      </div>
+      <button class="close-btn1" onclick="closePopup1()">Guardar</button>
+    </div>
+  </div>
+
+  <div class="popup-container2">
+    <div class="popup2">
+      <h2>Modifica o Elimina tus notas</h2>
+      <div class="date-picker">
+        <input type="text" id="datePicker" placeholder="Selecciona una fecha">
+        <h4>Elige el día de la nota que quieres consultar</h4>
+      </div><br>
+      <button class="close-btn2" onclick="closePopup2()">Cancelar</button>
+    </div>
+  </div>
+</body>
+</html>
+
+

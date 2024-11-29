@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width">
+   <title>Perfil-PIXEL PARADISE</title>
+   <meta name="description" content="VerifyApp" />
+   <meta name="theme-color" content="#fffbfe" />
+   <link rel="icon" sizes="32x32" href="favicon.ico" />
+   <link rel="manifest" href="site.webmanifest" />
+   
+  <!-- Funciones en javascript -->
+   <script src="ungap/custom-elements.js"></script>
+   <script type="module" src="js/configura.js"></script>
+   <script type="module" src="/js/custom/mi-nav.js"></script>
+   <script type="module" src="lib/js/ejecuta.js"></script>
+   <script type="module" src="lib/js/muestraError.js"></script>
+   <script type="module" src="./js/Sesion.js"></script>
+   <link rel="stylesheet" href="css/estilos.css" />
+</head>
+
+<body onload="ejecuta('srv/srvSesion.php')
+  .then(objeto => {
+   const sesion = new Sesion(objeto)
+   nav.sesion = sesion
+    
+   const usuario = sesion.usuario
+   const apellido1 = sesion.apellido1
+   const apellido2 = sesion.apellido2
+   const correo = sesion.correo
+   const direccion = sesion.direccion
+    
+   if (usuario === '' && correo === '' && apellido1 === '' && apellido2 ==='' && direccion === '') {
+    login.hidden = false
+    outputCue.value = 'No ha iniciado sesión.'
+   } else {
+    logout.hidden = false
+    Correo.hidden = false 
+    Direccion.hidden= false
+    outputCue.value = usuario + ' ' + apellido1 + ' ' + apellido2 
+    outputCorreo.value = correo
+    outputDireccion.value = direccion
+   }
+  })
+  .catch(muestraError)">
+
+  
+   <md-top-app-bar headline="h1Headline">
+      <h1>Perfil</h1>
+      <button type="button" title="Regresar a inicio" slot="navigation" class="md-standard-icon-button" onclick="window.location.href = 'index.html';">
+         <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+       <span class="material-symbols-outlined">account_circle</span>
+     </button>
+     <h1  class="titulosSecundarios"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos">PERFIL</h1>
+   </md-top-app-bar>
+
+  <h1 id="h1Headline" class="titulosSecundarios1"> <img src="img/titulos.png" class="imagenTitulo" alt="imagenTitulos" >PERFIL</h1>
+  
+   <mi-nav id="nav" class="center-aligned"></mi-nav>
+
+   <main>
+
+        <md-filled-text-field value="outputCue" >
+         <label for="outputCue">
+          Usuario
+         </label>
+          <output id="outputCue" slot="input-text">
+           <progress max="100">Cargando&hellip;</progress>
+          </output>
+        </md-filled-text-field>
+
+        <md-filled-text-field value="outputCorreo" id="Correo" hidden >
+         <label for="outputCorreo">
+          Informacion del usuario
+         </label>
+          <output id="outputCorreo"  slot="input-text">
+           <progress max="100">Cargando&hellip;</progress>
+          </output>
+        </md-filled-text-field>
+     
+        <md-filled-text-field value="outputDireccion" id="Direccion" hidden >
+         <label for="outputDireccion">
+          Direccion
+         </label>
+          <output id="outputDireccion"  slot="input-text">
+           <progress max="100">Cargando&hellip;</progress>
+          </output>
+        </md-filled-text-field>
+
+
+
+       <button type="submit" class="md-filled-button" style="width: 90%; margin:0 15px;" id="login" hidden onclick="window.location.href='inicioSesion.html'">
+      Iniciar sesión
+       </button>
+
+       <button type="button"  class="md-filled-button" style="width: 90%; margin:0 15px;" id="logout" hidden onclick="ejecuta('srv/srvLogout.php')
+         .then(json => location.reload())
+         .catch(muestraError)">
+        Terminar sesión
+       </button>
+   </main>
+
+   <!-- <script>
+      function verificarSesion() {
+         ejecuta('srv/srvSesion.php')
+            .then(objeto => {
+               const sesion = new Sesion(objeto);
+               const usuario = sesion.usuario;
+               if (usuario === '') {
+                  // Si no hay una sesión iniciada, muestra el botón de inicio de sesión
+                  document.getElementById('login').hidden = false;
+                  // Aquí puedes mostrar algún mensaje para indicar que no ha iniciado sesión
+                  document.getElementById('outputCue').innerText = 'No ha iniciado sesión.';
+               } else {
+                  // Si hay una sesión iniciada, muestra el botón de cierre de sesión
+                  document.getElementById('logout').hidden = false;
+                  // Aquí puedes mostrar la información del usuario, como su nombre de usuario
+                  document.getElementById('outputCue').innerText = `Usuario: ${usuario}`;
+               }
+            })
+            .catch(muestraError);
+      }
+   </script> -->
+
+</body>
+
+</html>

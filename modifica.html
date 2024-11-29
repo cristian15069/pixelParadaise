@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Modificar</title>
+
+  <script type="module" src="lib/js/ejecuta.js"></script>
+  <script type="module" src="lib/js/submitForma.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+  <script type="module" src="lib/js/muestraObjeto.js"></script>
+  <script type="module" src="lib/js/confirmaEliminar.js"></script>
+
+ <script>
+   // Obtiene los parámetros de la página.
+   const parametros = new URL(location.href).searchParams
+ </script>
+
+</head>
+
+<body onload="ejecuta('srv/srvLibroBusca.php?' + parametros) 
+  .then(objeto => muestraObjeto(forma, objeto))
+  .catch(muestraError)">
+  
+<main>
+ <form id="forma" method="POST" onsubmit="submitForma('srv/srvLibroModifica.php', event, forma)
+    .then(objeto => location.href ='catalogo.html')
+    .catch(muestraError)" enctype="multipart/form-data">
+
+  <h1>Modificar</h1>
+
+  <p><a href="index.html">Cancelar</a></p>
+
+  <input type="hidden" class="id" name="id">
+
+  <p>
+   <label>
+    Imagen *
+    <input type="file" name="imagen" required value="Cargando&hellip;">
+   </label>
+  </p>
+
+  <p>* Obligatorio</p>
+
+  <p>
+
+   <button type="submit">Guardar</button>
+
+   <button type="button"
+     onclick="if (confirmaEliminar()) { ejecuta('srv/srvLibroElimina.php?' + parametros) .then(() => location.href = 'index.html') .catch(muestraError) }">
+    Eliminar
+   </button>
+
+  </p>
+
+ </form>
+</main>
+</body>
+
+</html>
