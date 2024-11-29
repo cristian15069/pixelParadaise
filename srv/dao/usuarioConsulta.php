@@ -22,7 +22,7 @@ function usuarioConsulta()
  );
  $resultado = $stmt->fetchAll(
   PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,
-  Usuarios::class
+  Usuario::class
  );
  return recibeFetchAll($resultado);
 }
